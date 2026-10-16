@@ -217,6 +217,17 @@ On desktop, the buttons on a movie or show page (Mark played, Add to favorites, 
 @import url(https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/modules/detail-buttons.css);
 ```
 
+## TV
+
+On TVs (Jellyfin's TV layout, such as the Samsung Tizen and LG webOS apps) the theme uses its own sizing: smaller text and tabs, a thin focus ring, larger Next Up and Continue Watching tiles, and a compact movie and show page with the poster beside the details. To change the card corner rounding or the focus ring thickness on TV, add this to your custom CSS:
+
+```css
+html.layout-tv {
+  --tv-card-rounding: 28px;
+  --tv-focus-ring: 0.2em;
+}
+```
+
 ## Login background
 
 If the splash screen is enabled in Jellyfin (Dashboard, General), the login page uses it as its background. If it is off, the theme shows its own image. To use your own image in that case, add this to your custom CSS:

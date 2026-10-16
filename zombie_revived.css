@@ -2065,15 +2065,15 @@ layout-mobile .detailPagePrimaryContent {
   filter: blur(16px) saturate(120%) contrast(120%) brightness(40%);
 }
 .layout-tv {
-  font-size: 190% !important;
+  --tv-card-rounding: 28px;
+  --tv-focus-ring: 0.2em;
+  font-size: 140% !important;
 }
 .layout-tv .card:focus .cardBox.visualCardBox,
 .layout-tv .card:focus .cardBox:not(.visualCardBox) .cardScalable {
-  border-color: rgba(var(--accent), 0.75) !important;
-  border-radius: 50px !important;
-  background-color: rgba(var(--accent), 0.75);
-  box-shadow: 2px 3px 16px rgba(var(--accent), 0.45);
-  backdrop-filter: blur(5px);
+  border-color: rgb(var(--accent)) !important;
+  border-radius: calc(var(--tv-card-rounding) + var(--tv-focus-ring)) !important;
+  box-shadow: 0 0 1.4em rgba(var(--accent), 0.5);
 }
 .layout-tv .missingIndicator,
 .layout-tv .unairedIndicator,
@@ -2115,21 +2115,22 @@ layout-mobile .detailPagePrimaryContent {
 .layout-tv .nowPlayingPageImage,
 .layout-tv .upNextDialog-poster-img,
 .layout-tv .upNextContainer {
-  border-radius: 48px !important;
+  border-radius: var(--tv-card-rounding) !important;
 }
 .layout-tv .MuiLinearProgress-root {
   backdrop-filter: blur(8px);
-  height: 20px;
+  height: 8px;
 }
 .layout-tv .innerCardFooter {
-  width: calc(100% - 82px);
-  bottom: 36px;
+  width: calc(100% - 2 * var(--tv-card-rounding));
+  bottom: 0.8em;
   box-shadow: 2px 3px 16px rgba(var(--dark), 0.45);
 }
 .layout-tv .sectionTabs {
   width: auto !important;
   align-self: center !important;
-  margin-top: -1em;
+  margin-top: -0.6em;
+  font-size: 80%;
 }
 .layout-tv .emby-tabs-slider .emby-button.show-focus:focus {
   background: rgba(var(--accent), 0.5) !important;
@@ -2143,8 +2144,10 @@ layout-mobile .detailPagePrimaryContent {
 .layout-tv .emby-tab-button.emby-button.show-focus,
 .layout-tv
   .emby-tab-button.emby-button.show-focus.emby-tab-button-active.lastFocused {
-  margin: 0.4em;
-  height: 3.6em;
+  margin: 0.25em;
+  height: 2.3em;
+  padding: 0 1.1em;
+  align-items: center;
 }
 .layout-tv .emby-tab-button.show-focus:focus {
   -webkit-transform: none !important;
@@ -2161,12 +2164,15 @@ layout-mobile .detailPagePrimaryContent {
 .layout-tv .emby-button.show-focus:focus {
   -webkit-transform: none !important;
   transform: none !important;
-  background-color: rgba(var(--accent), 0.75) !important;
+  background-color: rgb(var(--accent)) !important;
   padding: 0.4em;
   padding-right: 0.8em;
   padding-left: 0.7em;
   border-radius: 16px;
-  color: rgb(var(--dark)) !important;
+  color: rgb(var(--on-accent)) !important;
+}
+.layout-tv .emby-button.show-focus:focus .emby-button-foreground {
+  color: rgb(var(--on-accent));
 }
 .layout-tv .headerRight {
   height: auto !important;
@@ -2209,13 +2215,10 @@ layout-mobile .detailPagePrimaryContent {
   margin-left: 0vw !important;
   height: 37vh;
 }
-.layout-tv .card.show-focus:not(.show-animation) .cardBox.visualCardBox,
-.layout-tv
-  .card.show-focus:not(.show-animation)
-  .cardBox:not(.visualCardBox)
-  .cardScalable {
-  border: 0.8em solid #fff0;
-  border-radius: 72px !important;
+.layout-tv .card.show-focus .cardBox.visualCardBox,
+.layout-tv .card.show-focus .cardBox:not(.visualCardBox) .cardScalable {
+  border: var(--tv-focus-ring) solid #fff0;
+  border-radius: calc(var(--tv-card-rounding) + var(--tv-focus-ring)) !important;
 }
 .layout-tv .indicator {
   height: 2.3em;
@@ -2225,8 +2228,8 @@ layout-mobile .detailPagePrimaryContent {
 }
 .layout-tv .countIndicator,
 .layout-tv .playedIndicator {
-  font-size: 130%;
-  border-radius: 0 0 0 48px !important;
+  font-size: 110%;
+  border-radius: 0 0 0 var(--tv-card-rounding) !important;
   box-shadow: -1px 1px 17px 1px rgba(var(--darkest), 0.75);
 }
 .layout-tv .button-flat {
@@ -2277,7 +2280,7 @@ layout-mobile .detailPagePrimaryContent {
 }
 .layout-tv .listItemIndicators .countIndicator,
 .layout-tv .listItemIndicators .playedIndicator {
-  border-radius: 0 48px 0 48px !important;
+  border-radius: 0 var(--tv-card-rounding) 0 var(--tv-card-rounding) !important;
 }
 .layout-tv .listItemBody {
   padding: 1.35em 1.75em;
@@ -6983,4 +6986,322 @@ body:has(#loginPage:not(.hide)):has(.backdropImage[style*="Splashscreen"])
     > .MuiButton-sizeMedium {
     letter-spacing: 0.06em;
   }
+}
+/* TV layout (.layout-tv): sizing for big screens viewed from the couch */
+html.layout-tv {
+  --zf-s: 17vw;
+  --zf-text: 1.7em;
+  --zf-gap: 1.2em;
+  --zf-n: 30vw;
+}
+.layout-tv .skinHeader {
+  padding-bottom: 0;
+}
+.layout-tv .headerTop {
+  padding: 0.4em 0 0;
+}
+.layout-tv #indexPage {
+  padding-top: 0.5em !important;
+}
+.layout-tv .homeSectionsContainer .verticalSection {
+  margin-bottom: 1em;
+}
+.layout-tv #indexPage .sectionTitle {
+  font-size: 1.45em;
+  margin-top: 0.4em;
+  margin-bottom: 0.3em;
+}
+.layout-tv .padded-top-focusscale {
+  padding-top: 0.6em;
+  margin-top: -0.6em;
+}
+.layout-tv .padded-bottom-focusscale {
+  padding-bottom: 0.6em;
+  margin-bottom: -0.6em;
+}
+.layout-tv .cardFooter .cardText {
+  font-size: 0.95em;
+}
+/* Continue Watching: featured first card plus a two-row grid */
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card
+  .cardImageContainer {
+  border-radius: var(--tv-card-rounding) !important;
+}
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card
+  .cardText-first {
+  font-size: 0.95em;
+}
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card:first-child
+  .cardText-first {
+  bottom: 2.6em;
+  font-size: 1.6em;
+}
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card:first-child
+  .cardText-secondary {
+  bottom: 1.3em;
+  font-size: 0.95em;
+}
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+      > .card[data-positionticks]
+  ):not(:has(a[href*="type=nextup"]))
+  .card:first-child
+  .cardText {
+  left: 1.2em;
+  right: 1.2em;
+}
+/* Next Up: wide tiles with the thumbnail on the left and text on the right */
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardBox {
+  grid-template-columns: 52% minmax(0, 1fr);
+  column-gap: 0.9em;
+  border: 0 !important;
+  border-radius: var(--tv-card-rounding) !important;
+  background: rgba(var(--white), 0.08);
+  transition: box-shadow 120ms;
+}
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardScalable,
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardImageContainer {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent;
+  box-shadow: none !important;
+}
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .card:focus
+  .cardBox {
+  position: relative;
+  background: rgba(var(--white), 0.14);
+  box-shadow: 0 0 1.4em rgba(var(--accent), 0.5);
+}
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .card:focus
+  .cardBox::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  border: var(--tv-focus-ring) solid rgb(var(--accent));
+  border-radius: inherit;
+  pointer-events: none;
+}
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardText-first {
+  font-size: 1em;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.25;
+}
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardText-secondary {
+  margin-top: 0.3em;
+  font-size: 0.8em;
+}
+
+.layout-tv
+  #indexPage
+  .verticalSection:has(
+    .itemsContainer[data-monitor="videoplayback,markplayed"]
+  ):is(
+    :has(a[href*="type=nextup"]),
+    :not(:has(.itemsContainer > .card[data-positionticks]))
+  )
+  .cardFooter {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  align-self: center;
+  min-width: 0;
+  padding: 0 0.6em 0 0;
+}
+/* Detail page: smaller poster, title, info and overview beside it */
+.layout-tv .itemDetailPage {
+  padding-top: 1em !important;
+}
+.layout-tv .detailPageWrapperContainer {
+  display: flow-root;
+  margin-top: 0;
+}
+.layout-tv .detailImageContainer .card {
+  left: 4vw;
+  top: 0 !important;
+  width: 17vw;
+  max-width: 17vw;
+  margin-right: -17vw;
+}
+.layout-tv [dir="ltr"] .detailPagePrimaryContainer {
+  padding-left: 0;
+}
+.layout-tv [dir="ltr"] .detailRibbon {
+  padding-left: 24vw;
+  padding-right: 6vw;
+}
+.layout-tv [dir="ltr"] .detailPagePrimaryContent {
+  padding-left: 24vw;
+  padding-right: 6vw;
+  padding-top: 0.5em;
+}
+.layout-tv [dir="ltr"] .infoWrapper {
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+  margin-bottom: 0;
+}
+.layout-tv [dir="ltr"] .mainDetailButtons {
+  padding-left: 0 !important;
+  margin: 0.8em 0 0.4em;
+}
+.layout-tv .detailLogo:not(.hide) {
+  position: relative;
+  display: block;
+  top: auto;
+  left: auto;
+  right: auto;
+  width: 30vw;
+  height: 13vh;
+  margin: 0 0 0.8em 24vw;
+  background-position: left center;
+}
+.layout-tv .detailLogo:not(.hide) + .detailPageWrapperContainer .detailImageContainer .card {
+  margin-top: calc(-13vh - 0.8em);
+}
+.layout-tv .detailSection .detailSectionContent {
+  padding-left: 0;
+  padding-right: 0;
+}
+.layout-tv .detailPagePrimaryContent .overview {
+  max-width: 62em;
+  line-height: 1.45;
+}
+.layout-tv .tagline {
+  margin: 0.4em 0;
+}
+.layout-tv .itemDetailsGroup {
+  margin-top: 0.8em;
+}
+.layout-tv .detailPageSecondaryContainer {
+  padding-top: 1.5em;
+}
+.layout-tv .detailVerticalSection {
+  margin-bottom: 1.6em !important;
+}
+.layout-tv #castContent .card.overflowPortraitCard,
+.layout-tv #guestCastContent .card.overflowPortraitCard {
+  width: 12em !important;
+  height: auto;
+}
+.layout-tv .mainDetailButtons {
+  align-items: center;
+}
+.layout-tv .mainDetailButtons .detailButton {
+  margin: 0 0.3em 0 0;
+  padding: 0.45em 0.9em;
+}
+.layout-tv .mainDetailButtons .btnPlay {
+  flex-direction: row;
+  background-color: rgb(var(--accent));
+  color: rgb(var(--on-accent)) !important;
+  border-radius: var(--rounding-circle) !important;
+  padding: 0.45em 1.3em 0.45em 0.9em;
+}
+.layout-tv .mainDetailButtons .btnPlay .detailButton-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.layout-tv .mainDetailButtons .btnPlay .detailButton-icon {
+  margin: 0 0.25em 0 0;
+  font-size: 1.4em;
+  color: rgb(var(--on-accent));
+}
+.layout-tv .mainDetailButtons .btnPlay::after {
+  color: rgb(var(--on-accent));
+}
+.layout-tv .mainDetailButtons .emby-button.show-focus:focus {
+  padding: 0.45em 0.9em;
+  border-radius: var(--rounding-circle);
+}
+.layout-tv .mainDetailButtons .btnPlay.show-focus:focus {
+  padding: 0.45em 1.3em 0.45em 0.9em;
+  background-color: rgb(var(--accent)) !important;
+  box-shadow:
+    0 0 0 0.15em rgb(var(--white)),
+    0 0 1.2em rgba(var(--accent), 0.6);
 }
